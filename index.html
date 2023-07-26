@@ -19,7 +19,7 @@
           // Define the phone number
           var number = '+1234567890';
           // Create the SMS link with the phone number and body
-          var smsLink = 'sms:' + encodeURIComponent(number) +
+          var smsLink = 'sms:' + number +
                            '?body=' + encodeURIComponent(body);
           // Redirect the user to the SMS link
           console.log(smsLink)
