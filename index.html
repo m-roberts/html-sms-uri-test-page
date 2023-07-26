@@ -6,9 +6,25 @@
     <body>
         <h1>Test SMS URI Page</h1>
         <p>
-            Click on the link below to pre-populate an SMS message.
+            Fill out your message and click the button below to open your SMS client with the message pre-populated.
             Ensure to test this on a mobile device that can send SMS.
         </p>
-        <a href="sms:+1234567890?body=Hello%20there!">Send pre-populated SMS</a>
+        <textarea id="messageTextArea" rows="4" cols="50" placeholder="Enter your SMS message here..."></textarea>
+        <br>
+        <button onclick="redirectToSms()">Send SMS</button>
+        <script>
+        function redirectToSms() {
+          // Get the value of the textarea (the SMS message)
+          var body = document.getElementById('messageTextArea').value;
+          // Define the phone number
+          var number = '+1234567890';
+          // Create the SMS link with the phone number and body
+          var smsLink = 'sms:' + encodeURIComponent(number) +
+                           '?body=' + encodeURIComponent(body);
+          // Redirect the user to the SMS link
+          console.log(smsLink)
+          window.location.href = smsLink;
+        }
+        </script>
     </body>
 </html>
