@@ -11,59 +11,31 @@
         </p>
         <textarea id="messageTextArea" rows="4" cols="50" placeholder="Enter your SMS message here..."></textarea>
         <br>
-        <button onclick="redirect1()">sms:+1234567890;body=</button>
-        <button onclick="redirect2()">sms:+1234567890?body=</button>
-        <button onclick="redirect3()">sms:+1234567890&body=</button>
-        <button onclick="redirect4()">sms://+1234567890;body=</button>
-        <button onclick="redirect5()">sms://+1234567890?body=</button>
-        <button onclick="redirect6()">sms//:+1234567890?body=</button>
+        <button onclick="redirectToSms()">Send SMS</button>
         <script>
-        function redirect1() {
-            var body = document.getElementById('messageTextArea').value;
-            var number = '+1234567890';
-            var smsLink = "sms:" + number + ";body=" + encodeURIComponent(body);
-            console.log(smsLink);
-            window.location.href = smsLink;
+        function getMobileOperatingSystem() {
+          var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+          if ( userAgent.match( /iPad/i ) || userAgent.match( /iPhone/i ) || userAgent.match( /iPod/i ) ) { return 'iOS'; }
+
+          else { return 'Not iOS'; }
         }
 
-        function redirect2() {
-            var body = document.getElementById('messageTextArea').value;
-            var number = '+1234567890';
-            var smsLink = "sms:" + number + "?body=" + encodeURIComponent(body);
-            console.log(smsLink);
-            window.location.href = smsLink;
-        }
+        function redirectToSms() {
+          var body = document.getElementById('messageTextArea').value;
 
-        function redirect3() {
-            var body = document.getElementById('messageTextArea').value;
-            var number = '+1234567890';
-            var smsLink = "sms:" + number + "&body=" + encodeURIComponent(body);
-            console.log(smsLink);
-            window.location.href = smsLink;
-        }
+          var number = '+1234567890';
 
-        function redirect4() {
-            var body = document.getElementById('messageTextArea').value;
-            var number = '+1234567890';
-            var smsLink = "sms://" + number + ";body=" + encodeURIComponent(body);
-            console.log(smsLink);
-            window.location.href = smsLink;
-        }
+          var device = getMobileOperatingSystem();
+          var smsLink;
+          if(device == 'iOS') {
+            smsLink = "sms://" + number + "&body=" + encodeURIComponent(body);
+          } else {
+            smsLink = "sms:" + number + "?body=" + encodeURIComponent(body);
+          }
 
-        function redirect5() {
-            var body = document.getElementById('messageTextArea').value;
-            var number = '+1234567890';
-            var smsLink = "sms://" + number + "?body=" + encodeURIComponent(body);
-            console.log(smsLink);
-            window.location.href = smsLink;
-        }
-
-        function redirect6() {
-            var body = document.getElementById('messageTextArea').value;
-            var number = '+1234567890';
-            var smsLink = "sms://" + number + "&body=" + encodeURIComponent(body);
-            console.log(smsLink);
-            window.location.href = smsLink;
+          console.log(smsLink)
+          window.location.href = smsLink;
         }
         </script>
     </body>
