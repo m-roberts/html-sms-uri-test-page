@@ -11,12 +11,14 @@
         </p>
         <textarea id="messageTextArea" rows="4" cols="50" placeholder="Enter your SMS message here..."></textarea>
         <br>
-        <button onclick="redirect1()">sms:+1234567890;body=</button>
-        <button onclick="redirect2()">sms:+1234567890?body=</button>
-        <button onclick="redirect3()">sms:+1234567890&body=</button>
-        <button onclick="redirect4()">sms://+1234567890;body=</button>
-        <button onclick="redirect5()">sms://+1234567890?body=</button>
-        <button onclick="redirect6()">sms//:+1234567890?body=</button>
+        <button onclick="redirect1()">;</button>
+        <button onclick="redirect4()">; + //</button>
+        <br>
+        <button onclick="redirect2()">?</button>
+        <button onclick="redirect5()">? + //</button>
+        <br>
+        <button onclick="redirect3()">&</button>
+        <button onclick="redirect6()">& + //</button>
         <script>
         function redirect1() {
             var body = document.getElementById('messageTextArea').value;
