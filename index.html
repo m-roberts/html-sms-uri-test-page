@@ -31,7 +31,7 @@
           if(device == 'iOS') {
             smsLink = "sms://" + number + "&body=" + encodeURIComponent(body);
           } else {
-            smsLink = "sms:" + number + "?body=" + encodeURIComponent(body);
+            smsLink = "sms://" + number + "?body=" + encodeURIComponent(body);
           }
 
           console.log(smsLink)
