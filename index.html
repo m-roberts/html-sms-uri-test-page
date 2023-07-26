@@ -6,22 +6,34 @@
     <body>
         <h1>Test SMS URI Page</h1>
         <p>
-            Fill out your message and click the button below to open your SMS client with the message pre-populated.
+            Fill out your message and click the button below to open your SMS client with the message pre-populated, ready to send to +1234567890.
             Ensure to test this on a mobile device that can send SMS.
         </p>
         <textarea id="messageTextArea" rows="4" cols="50" placeholder="Enter your SMS message here..."></textarea>
         <br>
         <button onclick="redirectToSms()">Send SMS</button>
         <script>
+        function getMobileOperatingSystem() {
+          var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+          if ( userAgent.match( /iPad/i ) || userAgent.match( /iPhone/i ) || userAgent.match( /iPod/i ) ) { return 'iOS'; }
+
+          else { return 'Not iOS'; }
+        }
+
         function redirectToSms() {
-          // Get the value of the textarea (the SMS message)
           var body = document.getElementById('messageTextArea').value;
-          // Define the phone number
+
           var number = '+1234567890';
-          // Create the SMS link with the phone number and body
-          var smsLink = 'sms:' + number +
-                           '?body=' + encodeURIComponent(body);
-          // Redirect the user to the SMS link
+
+          var device = getMobileOperatingSystem();
+          var smsLink;
+          if(device == 'iOS') {
+            smsLink = "sms://" + number + "&body=" + encodeURIComponent(body);
+          } else {
+            smsLink = "sms:" + number + "?body=" + encodeURIComponent(body);
+          }
+
           console.log(smsLink)
           window.location.href = smsLink;
         }
